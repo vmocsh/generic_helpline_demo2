@@ -1,0 +1,70 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Helpline {% endblock %} 
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+<div class="pcoded-content">
+    <div class="pcoded-inner-content">
+        <!-- [ breadcrumb ] start -->
+        <!-- [ breadcrumb ] end -->
+        <div class="main-body">
+            <div class="page-wrapper">
+                <!-- [ Main Content ] start -->
+                <div class="row">
+
+                    <!-- [ Hover-table ] start -->
+                    <div class="col-xl-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5>Surveys</h5>
+                            </div>
+                            <div class="card-block table-border-style">
+                                <div class="table-responsive">
+                                    <table class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th class="text-center">Client</th>
+                                                <th class="text-center">Phone no.</th>
+                                                <th class="text-center">No. of surveys</th>
+                                                <th class="text-center">Completed surveys</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            {% for client in client_stats %}
+                                            <tr>
+                                                <td class="text-center">
+                                                <a class="text-primary" href="{%url 'dashboard:client_profile' client.0.id%}">
+                                                    {{ client.0.name }}
+                                                </td>
+                                                <td class="text-center">
+                                                    {{ client.0.client_number }}
+                                                </td>
+                                                <td class="text-center">
+                                                    {{ client.1}}
+                                                </td>
+                                                <td class="text-center">
+                                                    {{ client.2}}
+                                                </td>
+                                            </tr>
+                                            {% endfor %}
+                                            </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- [ Main Content ] end -->
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

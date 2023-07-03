@@ -1,0 +1,106 @@
+{% extends 'sidebar.html' %}
+
+{% load static %}
+
+{% block cssLinks %}
+<link href="{% static 'vendors/iCheck/skins/flat/green.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block pageContent %}
+<!-- page content -->
+
+<div class="right_col" role="main">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="x_panel">
+                <div class="x_content">
+                    <div class="col-md-12" style="padding-right: 25px;">
+                        <!-- page content -->
+                        <div>
+
+                            <div class="">
+                                <div class="page-title">
+                                    <div class="title_left "><h3>Add clients in survey</h3></div>
+
+                                </div>
+                                <div class="clearfix"></div>
+                                    <div class="title_left "><h2>Survey Id:  {{ survey_id }}</h2></div>
+                                <div class="row">
+                                    <div class="col-md-offset-1 col-md-10">
+                                        <div class="x_panel">
+                                            <form method="post" action="" class="form-horizontal form-label-left" enctype="multipart/form-data">{% csrf_token %}
+
+
+                                                      <div class="form-group">
+                                                        <div class="col-md-9 col-sm-9 col-xs-12">
+                                                                <input id="survey_id" type="hidden" name="survey_id" value={{ survey_id }} >
+                                                        </div>
+                                                      </div>
+
+                                                  <div class="form-group">
+                                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="csv-file">CSV File <span class="required">*</span>
+                                                        </label>
+                                                        <div class="col-md-9 col-sm-9 col-xs-12">
+                                                          <input type="file" id="csv-file" name="csv_file" required="required" class="form-control col-md-7 col-xs-12">
+                                                        </div>
+                                                  </div>
+
+                                                  <div class="form-group">
+                                                    <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3 text-center">
+                                                      <button type="submit" class="btn btn-primary">Add clients</button>
+                                                    </div>
+                                                  </div>
+
+                                                  <div class="text-center" >
+                                                        {%ifequal message "Clients added successfully" %}
+                                                            <h4 class="text-success">{{message}}</h4>
+                                                        {%else%}
+                                                            <h4 class="text-danger">{{message}}</h4>
+                                                         {%endifequal%}
+                                                  </div>
+                                            </form>
+                                            <div class="text-center" >
+                                                <a style="font-size: large;" href="{%static 'sample_survey_input.csv'%}">Click to download sample CSV file</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /page content -->
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+</div>
+<script src="{% static 'vendors/jquery/dist/jquery.min.js'%}"></script>
+    <!-- Bootstrap -->
+    <script src="{% static 'vendors/bootstrap/dist/js/bootstrap.min.js'%}"></script>
+
+    <!-- morris.js -->
+    <script src="{% static 'vendors/raphael/raphael.min.js'%}"></script>
+    <script src="{% static 'vendors/morris.js/morris.min.js'%}"></script>
+    <!-- bootstrap-progressbar -->
+    <script src="{% static 'vendors/bootstrap-progressbar/bootstrap-progressbar.min.js'%}"></script>
+    <!-- bootstrap-daterangepicker -->
+    <script src="{% static 'vendors/moment/min/moment.min.js'%}"></script>
+    <script src="{% static 'vendors/bootstrap-daterangepicker/daterangepicker.js'%}"></script>
+
+    <!-- Custom Theme Scripts -->
+    <script src="{% static 'build/js/custom.min.js'%}"></script>
+
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap.min.js"></script>
+
+{% endblock %}
+
+
+
+
+
+

@@ -1,0 +1,15 @@
+,Timestamp,Name_x,Mobile Number,Cluster Name,Address,Designation,Overall Remarks,How many members that need to be vaccinated?,Name.1,Age,Relation,Vaccination Date,Vaccination Type,Remarks,Name.2,Age.1,Relation.1,Vaccination Date.1,Vaccination Type.1,Remarks.1,Name.3,Age.2,Relation.2,Vaccination Date.2,Vaccination Type.2,Remarks.2,Name.4,Age.3,Relation.3,Vaccination Date.3,Vaccination Type.3,Remarks.3,Name_y
+0,,,nan,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+1,,,nan,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+2,,,nan,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+3,,,nan,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+4,,,nan,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+5,,,nan,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+6,5/12/2021 12:16:54,test,123,,,,,2.0,,,,,,,,,,,,,Name,,,,,,Name2,,,,,,
+7,5/12/2021 12:24:53,Vamshi,1234,Cluster,,,,2.0,,,,,,,,,,,,,Test2,,,,,,Vamshi,,,,,,
+8,5/12/2021 21:23:29,Satya,9845278175,Ct kere,Basavangudi,Director,,1.0,,,,,,,,,,,,,,,,,,,Test1,50.0,,5/20/2021,Covishield,,
+9,5/13/2021 20:00:25,Test1,9845278175,,,,,2.0,,,,,,,,,,,,,Test2,,,,,,Test3,,,,Covaxin,,
+10,5/20/2021 16:29:04,Test,Test,,,,,1.0,,,,,,,,,,,,,,,,,,,Test,,,,,,
+11,6/5/2021 14:39:56,Arun K,444444444,,,,,1.0,,,,,,,,,,,,,,,,,,,Katha,19.0,,,Covishield,,Arun K
+12,6/5/2021 14:45:30,Suraj,6666666666,,,,,1.0,,,,,,,,,,,,,,,,,,,ssss,21.0,,,Covishield,,Suraj
+13,7/10/2021 5:09:25,Rakesh_test,7777777777,,,,,1.0,,,,,,,,,,,,,,,,,,,test_1,,,,,,Rakesh

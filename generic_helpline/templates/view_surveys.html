@@ -1,0 +1,88 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Helpline {% endblock %} 
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+<div class="pcoded-content">
+    <div class="pcoded-inner-content">
+        <!-- [ breadcrumb ] start -->
+        <!-- [ breadcrumb ] end -->
+        <div class="main-body">
+            <div class="page-wrapper">
+                <!-- [ Main Content ] start -->
+                <div class="row">
+
+                    <!-- [ Hover-table ] start -->
+                    <div class="col-xl-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5>Surveys</h5>
+                            </div>
+                            <div class="card-block table-border-style">
+                                <div class="table-responsive">
+                                    <table class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th class="text-center">Survey id</th>
+                                                <th class="text-center">Survey Name</th>
+                                                <th class="text-center">Google Form Url</th>
+                                                <th class="text-center">Google Response Url</th>
+                                                <th class="text-center">User List</th>
+                                                <th class="text-center">Edit Survey</th>
+                                                <th class="text-center">number_of_people</th>
+                                                <th class="text-center">created</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            {% for survey in surveys %}
+                                            <tr>
+                                                <td class="text-center">
+                                                    {{ survey.id }}
+                                                </td>
+                                                <td class="text-center">
+                                                    {{ survey.name }}
+                                                </td>
+                                                <td class="text-center">
+                                                    <a class="text-primary" href="{{ survey.google_form_url }}" target="_blank"> View Google Form</a>
+                                                </td>
+                                                <td class="text-center">
+                                                    <!-- <a class="text-primary" href="{{ survey.response_csv_url }}" target="_blank"> View Responses</a> -->
+                                                    <a href="{% url 'dashboard:combined_csv'%}?survey_id={{ survey.id }}"> Download CSV
+                                                    </a>
+                                                </td>
+                                                <td class="text-center">
+                                                    <a class="text-primary" href="{%url 'dashboard:survey_details' survey.id%}"> User List</a>
+                                                </td>
+                                                <td class="text-center">
+                                                    <a class="text-primary" href="{%url 'dashboard:update_survey_users' survey.id%}"> Edit Survey </a>
+                                                </td>
+
+                                                <td class="text-center">
+                                                    {{ survey.number_of_people}}
+                                                </td>
+                                                <td class="text-center">
+                                                    {{ survey.created}}
+                                                </td>
+                                            </tr>
+                                            {% endfor %}
+                                            </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- [ Main Content ] end -->
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

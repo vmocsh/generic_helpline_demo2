@@ -1,0 +1,98 @@
+{% extends "layouts/base.html" %}
+
+{% load static %}
+
+
+{% block title %} Helpline {% endblock %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+<div class="pcoded-content">
+    <div class="pcoded-inner-content">
+        <!-- [ breadcrumb ] start -->
+        <!-- [ breadcrumb ] end -->
+        <div class="main-body">
+            <div class="page-wrapper">
+                <!-- [ Main Content ] start -->
+                <div class="row">
+
+                    <!-- [ Hover-table ] start -->
+                    <div class="col-xl-12">
+                        <div class="card">
+                            <div class="card-header" style="margin-bottom: 1cm;">
+                                <h5>Create Survey</h5>
+                            </div>
+
+                            <form method="post" action="" class="form-horizontal form-label-left"
+                                enctype="multipart/form-data">{% csrf_token %}
+
+                                <div class="form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="survey_url">Google
+                                        Form URL:<span class="required">*</span>
+                                    </label>
+                                    <div class="col-md-9 col-sm-9 col-xs-12">
+                                        <input id="survey_url" type="url" name="form_url_field" required="required"
+                                            class="form-control col-md-7 col-xs-12">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="response_csv_url">CSV
+                                        Response URL:<span class="required">*</span>
+                                    </label>
+                                    <div class="col-md-9 col-sm-9 col-xs-12">
+                                        <input id="response_csv_url" type="url" name="response_url_field"
+                                            required="required" class="form-control col-md-7 col-xs-12">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="csv-file">CSV File
+                                        <span class="required">*</span>
+                                    </label>
+                                    <div class="col-md-9 col-sm-9 col-xs-12">
+                                        <input type="file" id="csv-file" name="csv_file" required="required"
+                                            class="form-control col-md-7 col-xs-12">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3 text-center">
+                                        <button type="submit" class="btn btn-primary">Create
+                                            Survey</button>
+                                    </div>
+                                </div>
+
+                                <div class="text-center">
+                                    {%ifequal message "Survey created successfully" %}
+                                    <h4 class="text-success">{{message}}</h4>
+                                    {%else%}
+                                    <h4 class="text-danger">{{message}}</h4>
+                                    {%endifequal%}
+                                </div>
+
+                                <div class="text-center">
+                                    <a style="font-size: large; margin-left: -600px;" href="{%static 'sample_survey_input.csv'%}">Click to
+                                        download sample
+                                        CSV file</a>
+                                </div>
+                                
+                            </form>
+                            
+
+                        </div>
+                    </div>
+                </div>
+                <!-- [ Main Content ] end -->
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

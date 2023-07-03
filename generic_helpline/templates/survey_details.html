@@ -1,0 +1,108 @@
+{% extends 'sidebar.html' %}
+
+{% load static %}
+
+{% block cssLinks %}
+<link href="{% static 'vendors/iCheck/skins/flat/green.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block pageContent %}
+<!-- page content -->
+
+
+<div class="right_col" role="main">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="x_panel">
+                <div class="x_content">
+                    <div class="col-md-12" style="padding-right: 25px;">
+                        <!-- page content -->
+                        <div>
+                            <div class="">
+                                <div class="page-title">
+                                    <div class="title_left">
+                                        <h3>Survey users</h3>
+
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                                <br>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <table class="table table-striped projects" id="survey_users">
+                                                    <thead>
+                                                    <tr>
+                                                        <th class="text-center">Survey id</th>
+                                                        <th class="text-center">User name</th>
+                                                        <th class="text-center">User phone no</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    {% for surveytask in surveytasks %}
+                                                    <tr>
+                                                        <td class="text-center">
+                                                            {{ surveytask.survey.id }}
+                                                        </td>
+                                                        <td class="text-center">
+                                                            {{ surveytask.client.name }}
+                                                        </td>
+                                                        <td class="text-center">
+                                                            {{ surveytask.client.client_number}}
+                                                        </td>
+                                                    </tr>
+                                                    {% endfor %}
+                                                    </tbody>
+                                                </table>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    <script src="{% static 'vendors/jquery/dist/jquery.min.js'%}"></script>
+    <!-- Bootstrap -->
+    <script src="{% static 'vendors/bootstrap/dist/js/bootstrap.min.js'%}"></script>
+
+    <!-- morris.js -->
+    <script src="{% static 'vendors/raphael/raphael.min.js'%}"></script>
+    <script src="{% static 'vendors/morris.js/morris.min.js'%}"></script>
+    <!-- bootstrap-progressbar -->
+    <script src="{% static 'vendors/bootstrap-progressbar/bootstrap-progressbar.min.js'%}"></script>
+    <!-- bootstrap-daterangepicker -->
+    <script src="{% static 'vendors/moment/min/moment.min.js'%}"></script>
+    <script src="{% static 'vendors/bootstrap-daterangepicker/daterangepicker.js'%}"></script>
+
+
+    <script src="{% static 'vendors/flot/jquery.flot.min.js'%}"></script>
+    <!-- FLOT RESIZE PLUGIN - allows the chart to redraw when the window is resized -->
+    <script src="{% static 'vendors/flot/jquery.flot.resize.min.js'%}"></script>
+    <!-- FLOT PIE PLUGIN - also used to draw donut charts -->
+    <script src="{% static 'vendors/flot/jquery.flot.pie.min.js'%}"></script>
+    <!-- FLOT CATEGORIES PLUGIN - Used to draw bar charts -->
+    <script src="{% static 'vendors/flot/jquery.flot.categories.min.js'%}"></script>
+    <!-- Custom Theme Scripts -->
+    <script src="{% static 'build/js/custom.min.js'%}"></script>
+
+        <script type="text/javascript" src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap.min.js"></script>
+
+     <script>
+        $(document).ready(function () {
+            $('#survey_users').dataTable({
+            order: [[ 0, "desc" ]]
+            });
+        });
+    </script>
+    {% endblock %}
+
+
+
+
+
+

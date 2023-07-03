@@ -1,0 +1,72 @@
+{% extends "layouts/base.html" %}
+
+{% load static %}
+
+
+{% block title %} Helpline {% endblock %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+<div class="pcoded-content">
+    <div class="pcoded-inner-content">
+        <!-- [ breadcrumb ] start -->
+        <!-- [ breadcrumb ] end -->
+        <div class="main-body">
+            <div class="page-wrapper">
+                <!-- [ Main Content ] start -->
+                <div class="row">
+
+                    <!-- [ Hover-table ] start -->
+                    <div class="col-xl-12">
+                        <div class="card">
+                            <div class="card-header" style="margin-bottom: 1cm;">
+                                <h5>Tag list update</h5>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="csv-file">CSV File
+                                    <span class="required">*</span>
+                                </label>
+                            </div>
+
+                            <form method="post" action="" class="form-horizontal form-label-left"
+                                style="margin: 0 auto;" enctype="multipart/form-data">{% csrf_token %}
+
+                                <div class="form-group">
+                                    
+                                    <div class="">
+                                        <input type="file" id="csvfile" name="csvfile" required="required"
+                                            class="form-control">
+                                    </div>
+                                </div>
+                                <div class="text-center">
+                                    {%ifequal message "Update Successful" %}
+                                    <h4 class="text-success">{{message}}</h4>
+                                    {%else%}
+                                    <h4 class="text-danger">{{message}}</h4>
+                                    {%endifequal%}
+
+                                </div>
+                                <div class="form-group">
+                                    <div class="text-center">
+                                        <button type="submit" class="btn btn-primary">Update Tag List</button>
+                                    </div>
+                                </div>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+                <!-- [ Main Content ] end -->
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

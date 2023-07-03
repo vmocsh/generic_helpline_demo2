@@ -1,0 +1,219 @@
+{% extends "layouts/base.html" %}
+
+{% load static %}
+
+
+{% block title %} Helpline {% endblock %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+<div class="pcoded-content">
+    <div class="pcoded-inner-content">
+        <!-- [ breadcrumb ] start -->
+        <!-- [ breadcrumb ] end -->
+        <div class="main-body">
+            <div class="page-wrapper">
+                <!-- [ Main Content ] start -->
+                <div class="row">
+
+                    <!-- [ Hover-table ] start -->
+                    <div class="col-xl-12">
+
+
+                        <div class="card" style="margin-bottom: 1cm;">
+                            <div class="card-header" style="margin-bottom: 1cm;">
+                                <h5>Helper Details</h5>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-offset-2 col-md-8" style="margin: auto;">
+                                    <div class="x_panel">
+                                        <div class="x_content text-center" style="color:black;font-size: large;">
+                                            <p>Username : {{helper.user.username}}</p>
+                                            <p>First Name : {{helper.user.first_name}}</p>
+                                            <p>Last Name : {{helper.user.last_name}}</p>
+                                            <p>Phone No : {{helper.helper_number}}</p>
+                                            <p>Email : {{helper.user.email}}</p>
+                                            {%ifequal category_assigned None%}
+                                            <p>Category Assigned: None</p>
+                                            {%else%}
+                                            <p>Category Assigned : {{category_assigned}} </p>
+                                            {%endifequal%}
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                        <!-- [ Hover-table ] start -->
+                        <!-- <div class="col-xl-12">
+
+                            <div class="card">
+                                <div class="card-header" style="margin-bottom: 0;">
+                                    <h5>Helper Statistics</h5>
+                                </div>
+
+                                <div class="col-md-3 pull-right">
+                                    <br>
+                                    <select class="form-control" id="years" onchange="changeYear()">
+                                        <option value="0">Current Year ({{cur_year}})</option>
+                                        {%for year in years%}
+                                        <option value="{{year}}">{{year}}</option>
+                                        {%endfor%}
+                                    </select>
+                                </div>
+                                <div class="col-md-3 pull-right">
+                                    <br>
+                                    <select class="form-control" id="cats" onchange="changeCats()">
+                                        <option value="0">Current Category ({{cur_cat}})</option>
+                                        <option value="All">All</option>
+                                        {%for cat in helper_cats%}
+                                        <option value="{{cat.name}}">{{cat.name}}</option>
+                                        {%endfor%}
+                                    </select>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <div class="x_content2">
+                                            <div id="graphx" style="width:100%; height:300px;"></div>
+                                        </div>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+                        </div> -->
+
+                        <div class="col-xl-12">
+
+
+                            <div class="card" style="margin-bottom: 1cm;">
+                                <div class="card-header" style="margin-bottom:0;">
+                                    <h5>Tasks</h5>
+                                </div>
+    
+                                <div class="card-block table-border-style">
+                                    <div class="table-responsive">
+                                        <table class="table table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th class="text-center">Task ID</th>
+                                                    <th class="text-center">Category</th>
+                                                    <th class="text-center">Created</th>
+                                                    <th class="text-center">Client</th>
+                                                    <th class="text-center">Helper</th>
+                                                    <th class="text-center">Status</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {% for assign in assigns %}
+                                                <tr>
+                                                    <td class="text-center">
+                                                        <a class="text-primary"
+                                                            href="{%url 'dashboard:task_details' assign.action.task%}">{{assign.action.task}}</a>
+                                                    </td>
+                                                    <td class="text-center">
+                                                        {{ assign.action.task.category }}
+                                                    </td>
+                                                    <td class="text-center">
+                                                        {{ assign.action.task.created | date:"d.m.Y, g:i a" }}
+                                                    </td>
+                                                    <td class="text-center">
+                                                        {{ assign.action.task.call_request.client }}
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <a
+                                                            href="{%url 'dashboard:helper_profile' assign.helper.id 'All' assign.created.year%}">
+                                                            {{ assign.helper.user.first_name|title }}
+                                                            {{assign.helper.user.last_name|title }}</a>
+                                                    </td>
+                                                    <td class="text-center">
+                                                        {% ifequal assign.status 1 %}
+                                                        <div class="text-danger">pending</div>
+                                                        {% endifequal %}
+                                                        {% ifequal assign.status 2 %}
+                                                        <div class="text-primary">accepted</div>
+                                                        {% endifequal %}
+                                                        {% ifequal assign.status 6 %}
+                                                        <div class="text-success">completed</div>
+                                                        {% endifequal %}
+                                                        {% ifequal assign.status 3 %}
+                                                        <div class="text-danger">rejected</div>
+                                                        {% endifequal %}
+                                                        {% ifequal assign.status 4 %}
+                                                        <div class="text-danger">timed out</div>
+                                                        {% endifequal %}
+                                                    </td>
+
+                                                </tr>
+                                                {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                </div>
+            </div>
+        </div>
+        <!-- [ Main Content ] end -->
+    </div>
+</div>
+</div>
+</div>
+<script>
+    $(document).ready(function() {
+      Morris.Bar({
+        element: 'graphx',
+        data: [
+          {x: 'Jan', Pending: {{pending_list.0}}, Completed: {{completed_list.0}}, Rejected: {{rejected_list.0}}, Timed_Out: {{to_list.0}}},
+          {x: 'Feb', Pending: {{pending_list.1}}, Completed: {{completed_list.1}}, Rejected: {{rejected_list.1}}, Timed_Out: {{to_list.1}}},
+          {x: 'Mar', Pending: {{pending_list.2}}, Completed: {{completed_list.2}}, Rejected: {{rejected_list.2}}, Timed_Out: {{to_list.2}}},
+          {x: 'Apr', Pending: {{pending_list.3}}, Completed: {{completed_list.3}}, Rejected: {{rejected_list.3}}, Timed_Out: {{to_list.3}}},
+          {x: 'May', Pending: {{pending_list.4}}, Completed: {{completed_list.4}}, Rejected: {{rejected_list.4}}, Timed_Out: {{to_list.4}}},
+          {x: 'Jun', Pending: {{pending_list.5}}, Completed: {{completed_list.5}}, Rejected: {{rejected_list.5}}, Timed_Out: {{to_list.5}}},
+          {x: 'Jul', Pending: {{pending_list.6}}, Completed: {{completed_list.6}}, Rejected: {{rejected_list.6}}, Timed_Out: {{to_list.6}}},
+          {x: 'Aug', Pending: {{pending_list.7}}, Completed: {{completed_list.7}}, Rejected: {{rejected_list.7}}, Timed_Out: {{to_list.7}}},
+          {x: 'Sep', Pending: {{pending_list.8}}, Completed: {{completed_list.8}}, Rejected: {{rejected_list.8}}, Timed_Out: {{to_list.8}}},
+          {x: 'Oct', Pending: {{pending_list.9}}, Completed: {{completed_list.9}}, Rejected: {{rejected_list.9}}, Timed_Out: {{to_list.9}}},
+          {x: 'Nov', Pending: {{pending_list.10}}, Completed: {{completed_list.10}}, Rejected: {{rejected_list.10}}, Timed_Out: {{to_list.10}}},
+          {x: 'Dec', Pending: {{pending_list.11}}, Completed: {{completed_list.11}}, Rejected: {{rejected_list.11}}, Timed_Out: {{to_list.11}}},
+        ],
+        xkey: 'x',
+        ykeys: ['Pending', 'Completed', 'Rejected', 'Timed_Out'],
+        barColors: ['#d8b400', '#4CAF50', '#F44336', '#FF9800'],
+        hideHover: 'auto',
+        labels: ['Pending', 'Completed', 'Rejected', 'Timed Out'],
+        resize: true
+      }).on('click', function (i, row) {
+          console.log(i, row);
+      });
+      $MENU_TOGGLE.on('click', function() {
+        $(window).resize();
+      });
+    });
+  </script>
+  <script>
+      function changeYear(){
+          var e = document.getElementById("years");
+          var year = e.options[e.selectedIndex].value;
+          if(year!="0")
+              window.location.href = {{url}}+"helper_profile/{{pk}}/{{cur_cat}}/"+year+"/";
+      }
+      function changeCats() {
+          var e = document.getElementById("cats");
+          var cat = e.options[e.selectedIndex].value;
+          if (cat != "0")
+              window.location.href = {{url}}+"helper_profile/{{pk}}/" + cat + "/{{cur_year}}/";
+      }
+  </script>
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

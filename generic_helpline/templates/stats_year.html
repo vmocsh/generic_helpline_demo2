@@ -1,0 +1,319 @@
+{% extends "layouts/base.html" %}
+
+{% load static %}
+
+{% block stylesheets %}
+<link rel="stylesheet" href="{% static '/assets/plugins/chart-morris/css/morris.css' %}">
+<link href="{% static 'vendors/bootstrap/dist/css/bootstrap.min.css' %}" rel="stylesheet">
+{% endblock %}
+
+
+
+<!-- page content <link href="{% static 'vendors/iCheck/skins/flat/green.css' %}" rel="stylesheet"> <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">   -->
+
+{% block content %}
+
+
+
+
+<div class="right_col" role="main">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="x_panel">
+                <div class="x_content">
+                    <div class="col-md-12" style="padding-right: 25px;">
+                        <!-- page content -->
+                        <div>
+                            <div class="">
+                                <div class="page-title">
+                                    <div class="title_left">
+                                        <h3>Task Statistics</h3>
+
+                                    </div>
+                                    <div class="col-md-2 pull-right">
+                                        <br>
+                                        <select class="form-control" id="years" onchange="changeYear()">
+                                            <option value="0">Current Year ({{cur_year}})</option>
+                                            {%for year in years%}
+                                            <option value="{{year}}">{{year}}</option>
+                                            {%endfor%}
+                                        </select>
+                                    </div>
+
+
+
+                                    <div class="col-md-2 pull-right">
+                                        <br>
+                                        <select class="form-control" id="cats" onchange="changeCats()">
+                                            <option value="0">Current Category ({{cur_cat}})</option>
+                                            <option value="All">All</option>
+                                            {%for cat in helper_cats%}
+                                            <option value="{{cat.name}}">{{cat.name}}</option>
+                                            {%endfor%}
+                                        </select>
+                                    </div>
+
+                                <div class="col-md-2 pull-right">
+                                        <br>
+                                        <select class="form-control" id="month" onchange="changeMonth()">
+                                            <option value="0">Current Month ({{cur_month}})</option>
+                                            <option value="Jan">Jan</option>
+                                            <option value="Feb">Feb</option>
+                                            <option value="Mar">Mar</option>
+                                            <option value="Apr">Apr</option>
+                                            <option value="May">May</option>
+                                            <option value="Jun">Jun</option>
+                                            <option value="Jul">Jul</option>
+                                            <option value="Aug">Aug</option>
+                                            <option value="Sep">Sep</option>
+                                            <option value="Oct">Oct</option>
+                                            <option value="Nov">Nov</option>
+                                            <option value="Dec">Dec</option>
+                                        </select>
+                                    </div>
+
+                                </div>
+                                <div class="clearfix"></div>
+                                <br>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="col-md-5 col-md-offset-1">
+                                            <div class="text-center tile-stats">
+                                                <div class="count text-muted">{{average_assignment_time}}</div>
+                                                <h3><span class="text-danger"><b>Average Assignment Time</b></span></h3>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-md-5 col-md-offset-1">
+                                            <div class="text-center tile-stats">
+                                                <div class="count text-muted">{{average_completion_time}}</div>
+                                                <h3><span class="text-success"><b>Average Completion Time</b></span></h3>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="col-md-7 col-md-offset-3">
+                                            <div class="text-center tile-stats">
+                                                <br>
+                                                 <div class="col-md-4">
+                                                    <div class="text-center tile-stats">
+                                                        <div class="count text-muted">{{min_tasks}}</div>
+                                                        <h3><span class="text-success"><b>Min</b></span></h3>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="text-center tile-stats">
+                                                        <div class="count text-muted">{{avg_tasks}}</div>
+                                                        <h3><span class="text-success"><b>Avg</b></span></h3>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="text-center tile-stats">
+                                                        <div class="count text-muted">{{max_tasks}}</div>
+                                                        <h3><span class="text-success"><b>Max</b></span></h3>
+                                                    </div>
+                                                </div>
+                                                <h3><span class="text-danger"><b>Task Assignemnt per day</b></span></h3>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+
+
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <div class="x_content">
+                                            <div id="morris-bar-chart" style="width:100%; height:300px;"></div>
+                                        </div>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="x_panel">
+                <div class="x_content">
+                    <div class="col-md-12" style="padding-right: 25px;">
+                        <!-- page content -->
+                        <div>
+
+                            <div class="">
+                                <div class="page-title">
+                                    <div class="title_left "><h3>Category Stats</h3></div>
+
+                                </div>
+                                <div class="clearfix"></div>
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="x_panel">
+                                            <div class="x_content">
+                                                <div id="donut-chart" style="height: 500px;"></div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /page content -->
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+{% endblock content %}
+{% block javascripts %}
+
+    <script src="{% static 'vendors/jquery/dist/jquery.min.js'%}"></script>
+    <!-- Bootstrap -->
+    <script src="{% static 'vendors/bootstrap/dist/js/bootstrap.min.js'%}"></script>
+
+    <!-- morris.js -->
+    <script src="{% static 'vendors/raphael/raphael.min.js'%}"></script>
+    <script src="{% static 'vendors/morris.js/morris.min.js'%}"></script>
+    <!-- bootstrap-progressbar -->
+    <script src="{% static 'vendors/bootstrap-progressbar/bootstrap-progressbar.min.js'%}"></script>
+    <!-- bootstrap-daterangepicker -->
+    <script src="{% static 'vendors/moment/min/moment.min.js'%}"></script>
+    <script src="{% static 'vendors/bootstrap-daterangepicker/daterangepicker.js'%}"></script>
+
+
+    <script src="{% static 'vendors/flot/jquery.flot.min.js'%}"></script>
+    <!-- FLOT RESIZE PLUGIN - allows the chart to redraw when the window is resized -->
+    <script src="{% static 'vendors/flot/jquery.flot.resize.min.js'%}"></script>
+    <!-- FLOT PIE PLUGIN - also used to draw donut charts -->
+    <script src="{% static 'vendors/flot/jquery.flot.pie.min.js'%}"></script>
+    <!-- FLOT CATEGORIES PLUGIN - Used to draw bar charts -->
+    <script src="{% static 'vendors/flot/jquery.flot.categories.min.js'%}"></script>
+    <!-- Custom Theme Scripts -->
+    <script src="{% static 'build/js/custom.min.js'%}"></script>
+    <script>
+      $(document).ready(function() {
+        Morris.Bar({
+          element: 'morris-bar-chart',
+          data: [
+            {x: 'Jan', Pending: {{pen_jan}}, Completed: {{com_jan}}, Rejected: {{rej_jan}}, Timed_Out: {{to_jan}}},
+            {x: 'Feb', Pending: {{pen_feb}}, Completed: {{com_feb}}, Rejected: {{rej_feb}}, Timed_Out: {{to_feb}}},
+            {x: 'Mar', Pending: {{pen_mar}}, Completed: {{com_mar}}, Rejected: {{rej_mar}}, Timed_Out: {{to_mar}}},
+            {x: 'Apr', Pending: {{pen_apr}}, Completed: {{com_apr}}, Rejected: {{rej_apr}}, Timed_Out: {{to_apr}}},
+            {x: 'May', Pending: {{pen_may}}, Completed: {{com_may}}, Rejected: {{rej_may}}, Timed_Out: {{to_may}}},
+            {x: 'Jun', Pending: {{pen_jun}}, Completed: {{com_jun}}, Rejected: {{rej_jun}}, Timed_Out: {{to_jun}}},
+            {x: 'Jul', Pending: {{pen_jul}}, Completed: {{com_jul}}, Rejected: {{rej_jul}}, Timed_Out: {{to_jul}}},
+            {x: 'Aug', Pending: {{pen_aug}}, Completed: {{com_aug}}, Rejected: {{rej_aug}}, Timed_Out: {{to_aug}}},
+            {x: 'Sep', Pending: {{pen_sep}}, Completed: {{com_sep}}, Rejected: {{rej_sep}}, Timed_Out: {{to_sep}}},
+            {x: 'Oct', Pending: {{pen_oct}}, Completed: {{com_oct}}, Rejected: {{rej_oct}}, Timed_Out: {{to_oct}}},
+            {x: 'Nov', Pending: {{pen_nov}}, Completed: {{com_nov}}, Rejected: {{rej_nov}}, Timed_Out: {{to_nov}}},
+            {x: 'Dec', Pending: {{pen_dec}}, Completed: {{com_dec}}, Rejected: {{rej_dec}}, Timed_Out: {{to_dec}}},
+          ],
+          xkey: 'x',
+          ykeys: ['Pending', 'Completed', 'Rejected', 'Timed_Out'],
+          barColors: ['#d8b400', '#4CAF50', '#F44336', '#FF9800'],
+          hideHover: 'auto',
+          labels: ['Pending', 'Completed', 'Rejected', 'Timed Out'],
+          resize: true
+        }).on('click', function (i, row) {
+            console.log(i, row);
+        });
+        $MENU_TOGGLE.on('click', function() {
+          $(window).resize();
+        });
+      });
+
+    </script>
+    <script>
+    function changeYear(){
+        var e = document.getElementById("years");
+        var year = e.options[e.selectedIndex].value;
+        if(year!="0")
+            window.location.href = "{{url}}yearly_stats/{{cur_cat}}/"+year+"/";
+        //window.location.href = "http://vmocsh.cse.iitb.ac.in/demo/yearly_stats/{{cur_cat}}/"+year+"/";
+    }
+
+
+
+    function changeCats(){
+        var e = document.getElementById("cats");
+        var cat = e.options[e.selectedIndex].value;
+        if(cat!="0")
+            window.location.href = "{{url}}yearly_stats/"+cat+"/{{cur_year}}/";
+        //window.location.href = "http://vmocsh.cse.iitb.ac.in/demo/yearly_stats/"+cat+"/{{cur_year}}/";
+    }
+
+    function changeMonth() {
+        var e = document.getElementById("month");
+        var month = e.options[e.selectedIndex].value;
+        if (month != "0")
+            //window.location.href = "http://vmocsh.cse.iitb.ac.in/demo/monthly_stats/{{cur_cat}}/" + month + "/{{cur_year}}/";
+            window.location.href = "{{url}}monthly_stats/{{cur_cat}}/" + month + "/{{cur_year}}/";
+    }
+
+    $(document).ready(function() {
+        var colors=[ "#F57F17","#1A237E","#00c0ef","#D50000","#F50057","#689F38","#607D8B"]
+        var cat=[]
+        var cat_count=[]
+        {%for cat in helper_cats%}
+            cat.push("{{cat}}")
+        {%endfor%}
+        {%for c in cat_count%}
+            cat_count.push("{{c}}")
+        {%endfor%}
+        var donutData = [
+
+        ];
+        for(var i=0;i<cat.length;i++){
+            donutData.push({label: cat[i]+"("+cat_count[i]+")", data: cat_count[i], color: colors[i]})
+        }
+
+        $.plot("#donut-chart", donutData, {
+            series: {
+                pie: {
+                    show: true,
+                    radius: 1,
+                    innerRadius: 0.5,
+                    label: {
+                        show: true,
+                        radius: 2 / 3,
+                        formatter: labelFormatter,
+                        threshold: 0.1
+                    }
+
+                }
+            },
+            legend: {
+                show: false
+            }
+        });
+        function labelFormatter(label, series) {
+    return '<div style="font-size:15px; text-align:center; color: #fff; font-weight: 600;">'
+        + label
+        + "<br>"
+        + Math.round(series.percent) + "%</div>";
+  }
+    });
+    </script>
+
+
+{% endblock javascripts %}
+
+
+
+
+
+
+

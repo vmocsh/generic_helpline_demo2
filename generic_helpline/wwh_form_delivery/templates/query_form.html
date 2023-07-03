@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+{% load static %}
+{% load app_filters %}
+<html lang="en">
+<head>
+    <title>Contact Us</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--===============================================================================================-->
+    <link rel="icon" type="image/png" href="{% static 'wwh_form_delivery/images/icons/favicon.ico' %}"/>
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css"
+          href="{% static 'wwh_form_delivery/vendor/bootstrap/css/bootstrap.min.css' %}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css"
+          href="{% static 'wwh_form_delivery/fonts/font-awesome-4.7.0/css/font-awesome.min.css' %}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css"
+          href="{% static 'wwh_form_delivery/fonts/iconic/css/material-design-iconic-font.min.css' %}">
+    <!--===============================================================================================-->
+    <link rel=" stylesheet
+    " type="text/css" href="{% static 'wwh_form_delivery/vendor/animate/animate.css' %}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css"
+          href="{% static 'wwh_form_delivery/vendor/css-hamburgers/hamburgers.min.css' %}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css"
+          href="{% static 'wwh_form_delivery/vendor/animsition/css/animsition.min.css' %}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static 'wwh_form_delivery/vendor/select2/select2.min.css' %}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css"
+          href="{% static 'wwh_form_delivery/vendor/daterangepicker/daterangepicker.css' %}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static 'wwh_form_delivery/vendor/noui/nouislider.min.css' %}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static 'wwh_form_delivery/css/util.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'wwh_form_delivery/css/main.css' %}">
+    <!--===============================================================================================-->
+
+</head>
+<body>
+
+
+<div class="container-contact100">
+    <div class="wrap-contact100">
+        <form action={% url "wwh_form_delivery:submit_form" %} method="post" enctype="multipart/form-data"
+              class="contact100-form validate-form">
+            {% csrf_token %}
+            <span class="contact100-form-title">
+					KEM Hospital Contact Form
+				</span>
+
+
+            <div class="wrap-input100 validate-input bg1" data-validate="Please Enter Your Name">
+                <span class="label-input100">FULL NAME *</span>
+                {% if form.name.value|stringformat:'s' != 'None' %}
+                    <input class="input100" type="text" name="name" placeholder="Enter Your Name"
+                           value="{{ form.name.value|stringformat:'s' }}" readonly>
+                {% else %}
+                    <input class="input100" type="text" name="name" placeholder="Enter Your Name">
+                {% endif %}
+            </div>
+
+            <div class="wrap-input100 validate-input bg1 rs1-wrap-input100"
+                 data-validate="Please Enter Your Phone Number">
+                <span class="label-input100">10 Digit Mobile Number *</span>
+                <input class="input100" type="tel" name="contact" placeholder="Enter Number Phone"
+                       value="{{ form.contact.value|stringformat:'s' }}" readonly>
+            </div>
+
+            <div class="wrap-input100 validate-input bg1" data-validate="Please Enter Your Location">
+                <span class="label-input100">LOCATION *</span>
+                {% if form.location.value|stringformat:'s' != 'None' %}
+                    <input class="input100" type="text" name="location" placeholder="Enter Your Location"
+                           value="{{ form.location.value|stringformat:'s' }}" readonly>
+                {% else %}
+                    <input class="input100" type="text" name="location" placeholder="Enter Your Location">
+                {% endif %}
+            </div>
+
+            
+            <div class="wrap-contact100-form-radio validate-input bg1" data-validate="Please select any one category">
+                <span class="label-input100">CATEGORY</span>
+                {% if form.category.value|stringformat:'s' != 'None' %}
+                    <div class="contact100-form-radio">
+                        <br>
+                            <input class="input-radio100" type="radio" id="radio-cat-{{form.category.value|stringformat:'s'}}" name="category" value="{{form.category.value|stringformat:'s'}}"
+                                checked="checked">
+                            <label class="label-radio100" for="radio-cat-{{form.category.value|stringformat:'s'}}">{{form.category.value|stringformat:'s'}}</label>
+                    </div>             
+                {% else %}
+                    {% for category in available_categories_list %}
+                        <div class="contact100-form-radio">
+                            <br>
+                            <input class="input-radio100" type="radio" id="radio-cat-{{category}}" name="category" value="{{category}}">    
+                            <label class="label-radio100" for="radio-cat-{{category}}">{{category}}</label>
+                        </div>
+
+                    {% endfor %}
+                {% endif %}
+
+            </div>
+
+                <div class="wrap-contact100-form-radio validate-input bg1"
+                    data-validate="Please Select the Message Language">
+                    <span class="label-input100">LANGUAGE OF TEXT MESSAGE*</span>
+                    {% if form.language.value|stringformat:'s' != 'None' %}
+                        <div class="contact100-form-radio">
+                            <br>
+                            <input class="input-radio100" type="radio" id="radio-lang-{{form.language.value|stringformat:'s'}}" name="language"
+                                value="{{form.language.value|stringformat:'s'}}"
+                                checked >
+                            <label class="label-radio100" for="radio-lang-{{form.language.value|stringformat:'s'}}">{{form.language.value|stringformat:'s'}}</label>
+                        </div>
+                    {% else %}
+                        {% for language in available_languages_list %}
+                            <div class="contact100-form-radio">
+                                <br>
+                                <input class="input-radio100" type="radio" id="radio-lang-{{language}}" name="language"
+                                            value="{{language}}">
+                                <label class="label-radio100" for="radio-lang-{{language}}">{{language}}</label>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+            
+            
+
+            <div class="wrap-input100 validate-input bg0 rs1-alert-validate" data-validate="Please Type Your Message">
+                <span class="label-input100">Message History*</span>
+                <span class="input100"></span>
+                {% if form.previous_messages.value|stringformat:'s' != 'None' %}
+                    {% for msg in previous_messages %}
+                        {% if msg.type == 'text' %}
+                            <span class="input100" style="display: inline"> {{ msg.username|add:": " }} </span>
+                            <span class="input100" style="display: inline"> {{ msg.text }} </span>
+                        {% else %}
+                            <span class="input100" style="display: inline"> {{msg.username|add:": " }} </span>
+                            <a class="input100" href="{{ msg.url }}" target="_blank" style="display: inline; color: blue"> {{ msg.filename }}</a>
+                        {% endif %}
+                        <span class="input100"></span>
+                    {% endfor %}
+                {% endif %}
+            </div>
+
+            <div class="wrap-input100 validate-input bg0 rs1-alert-validate" data-validate="Please Type Your Message">
+                <span class="label-input100">Message *</span>
+
+                {% if form.message.value|stringformat:'s' != 'None' %}
+                    <textarea class="input100" name="message" placeholder="Your message here..."
+                              in>{{ form.message.value|stringformat:'s' }}</textarea>
+                {% else %}
+                    <textarea class="input100" name="message" placeholder="Your message here..." in></textarea>
+                {% endif %}
+            </div>
+
+            <div class="wrap-input100 bg0">
+                <span class="label-input100">Upload Image Files</span>
+                <input class="input100" type="file" name="files" multiple>
+            </div>
+
+            <input type="hidden" name="otp" value="{{ form.otp.value|stringformat:'s' }}"/>
+
+            <div class="container-contact100-form-btn">
+                <button class="contact100-form-btn">
+						<span>
+							Submit
+							<i class="fa fa-long-arrow-right m-l-7" aria-hidden="true"></i>
+						</span>
+                </button>
+            </div>
+
+
+        </form>
+    </div>
+</div>
+
+
+</body>
+</html>

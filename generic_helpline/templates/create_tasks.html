@@ -1,0 +1,83 @@
+{% extends "layouts/base.html" %}
+
+{% load static %}
+
+
+{% block title %} Helpline {% endblock %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+<div class="pcoded-content">
+    <div class="pcoded-inner-content">
+        <!-- [ breadcrumb ] start -->
+        <!-- [ breadcrumb ] end -->
+        <div class="main-body">
+            <div class="page-wrapper">
+                <!-- [ Main Content ] start -->
+                <div class="row">
+
+                    <!-- [ Hover-table ] start -->
+                    <div class="col-xl-12">
+                        <div class="card">
+                            <div class="card-header" style="margin-bottom: 1cm;">
+                                <h5>Create tasks</h5>
+                            </div>
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="csv-file">CSV File <span class="required">*</span>
+                            </label>
+
+                            <form method="post" action="" class="form-horizontal form-label-left" style="margin: auto;" enctype="multipart/form-data">{% csrf_token %}
+
+
+                                <!--<div class="form-group">
+                                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="csv-file">CSV File <span class="required">*</span>
+                                      </label>
+                                      <div class="col-md-9 col-sm-9 col-xs-12">
+                                        <input type="text" id="csv-file" name="textfield" required="required" class="form-control col-md-7 col-xs-12">
+                                      </div>
+                                </div>
+
+                                <textarea name="Text1" cols="40" rows="5"></textarea>-->
+
+                                <div class="form-group">
+                                      
+                                      <div class="col-md-9 col-sm-9 col-xs-12" >
+                                        <textarea name="Text" cols="40" rows="10"></textarea>
+                                      </div>
+                                </div>
+
+
+
+                                <div class="form-group">
+                                  <div class="text-center">
+                                    <button type="submit" class="btn btn-primary">Create Tasks</button>
+                                  </div>
+                                </div>
+
+                                <div class="text-center" >
+                                      {%ifequal message "Tasks created successfully" %}
+                                          <h4 class="text-success">{{message}}</h4>
+                                      {%else%}
+                                          <h4 class="text-danger">{{message}}</h4>
+                                       {%endifequal%}
+                                </div>
+                          </form>
+                          <div class="text-center" >
+                              <a style="font-size: large;" href="{%static 'sample_survey_input.csv'%}">Click to download sample CSV file</a>
+                          </div>
+
+                        </div>
+                    </div>
+                </div>
+                <!-- [ Main Content ] end -->
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

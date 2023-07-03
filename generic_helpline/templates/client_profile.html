@@ -1,0 +1,157 @@
+{% extends 'sidebar.html' %}
+
+{% load static %}
+
+{% block cssLinks %}
+<link href="{% static 'vendors/iCheck/skins/flat/green.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block pageContent %}
+<!-- page content -->
+
+<div class="right_col" role="main">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="x_panel">
+                <div class="x_content">
+                    <div class="col-md-12" style="padding-right: 25px;">
+                        <!-- page content -->
+                        <div>
+
+                            <div class="">
+                                <div class="page-title">
+                                    <div class="title_left "><h3>Client details</h3></div>
+
+                                </div>
+                                <div class="clearfix"></div>
+
+                                <div class="row">
+                                    <div class="col-md-offset-2 col-md-8">
+                                        <div class="x_panel">
+                                            <div class="x_content text-center" style="color:black;font-size: large;">
+                                                <p>Name : {{client.name}}</p>
+                                                <p>Location : {{client.location}}</p>
+                                                <p>Client Number : {{client.client_number}}</p>
+                                                {%ifequal client.status 1%}
+                                                    <p>Status: Active</p>
+                                                    {%else%}
+                                                        <p>Status : Blocked </p>
+                                                {%endifequal%}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /page content -->
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="x_panel">
+                <div class="x_content">
+                    <div class="col-md-12" style="padding-right: 25px;">
+                        <!-- page content -->
+                        <div>
+
+                            <div class="">
+                                <div class="page-title">
+                                    <div class="title_left "><h3>Survey Tasks</h3></div>
+
+                                </div>
+                                <div class="clearfix"></div>
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="x_panel">
+                                            <div class="x_content">
+                                                <!-- start project list -->
+                                                <table id="surveytasks" class="table table-striped projects">
+                                                    <thead>
+                                                    <tr>
+                                                        <th class="text-center">Task id</th>
+                                                        <th class="text-center">Survey name</th>
+                                                        <th class="text-center">Status</th>
+                                                        <th class="text-center">Assigned on</th>
+                                                        <th class="text-center">Completed on</th>
+                                                        <th class="text-center">Form url</th>
+
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    {% for task in client_survey_tasks %}
+                                                    <tr>
+                                                        <td class="text-center">
+                                                            {{ task.id }}
+                                                        </td>
+                                                        <td class="text-center">
+                                                            {{ task.survey.name }}
+                                                        </td>
+                                                        <td class="text-center">
+                                                            {{ task.status }}
+                                                        </td>
+                                                        <td class="text-center">
+                                                            {{ task.assignedDateTime | date:"d.m.Y, g:i a" }}
+                                                        </td>
+                                                        <td class="text-center">
+                                                            {{ task.completedDateTime | date:"d.m.Y, g:i a" }}
+                                                        </td>
+                                                        <td class="text-center">
+                                                            {% if not task.edit_form_url%}
+                                                            <div class="text-danger"> null</div>
+                                                                {%else%}
+                                                                <a class="text-primary" href="{{ task.edit_form_url }}" target="_blank"> View Response</a>
+                                                            {% endif %}
+                                                        </td>
+                                                    </tr>
+                                                    {% endfor %}
+                                                    </tbody>
+                                                </table>
+                                                <!-- end project list -->
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /page content -->
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+        </div>
+<script src="{% static 'vendors/jquery/dist/jquery.min.js'%}"></script>
+    <!-- Bootstrap -->
+    <script src="{% static 'vendors/bootstrap/dist/js/bootstrap.min.js'%}"></script>
+
+    <!-- morris.js -->
+    <script src="{% static 'vendors/raphael/raphael.min.js'%}"></script>
+    <script src="{% static 'vendors/morris.js/morris.min.js'%}"></script>
+    <!-- bootstrap-progressbar -->
+    <script src="{% static 'vendors/bootstrap-progressbar/bootstrap-progressbar.min.js'%}"></script>
+    <!-- bootstrap-daterangepicker -->
+    <script src="{% static 'vendors/moment/min/moment.min.js'%}"></script>
+    <script src="{% static 'vendors/bootstrap-daterangepicker/daterangepicker.js'%}"></script>
+
+    <!-- Custom Theme Scripts -->
+    <script src="{% static 'build/js/custom.min.js'%}"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#surveytasks').dataTable({
+                "order":[[0,"desc"]]
+            });
+        });
+
+    </script>
+{% endblock %}

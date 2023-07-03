@@ -1,0 +1,82 @@
+
+    <nav class="pcoded-navbar">
+        <div class="navbar-wrapper">
+            <div class="navbar-brand header-logo" style="margin-bottom: 1cm;">
+                <a target="_blank" 
+                    <span class="b-title">{{helper.helpline.name}} Helpline</span>
+                </a>
+                <a class="mobile-menu" id="mobile-collapse" href="javascript:"><span></span></a>
+            </div>
+            <div class="navbar-content scroll-div">
+                <ul class="nav pcoded-inner-navbar">
+                    <li class="nav-item pcoded-menu-caption">
+                        <label>Welcome {{ user|title }}</label>
+                    </li>
+                    
+                    <li class="nav-item pcoded-hasmenu">
+                        <a href="javascript:" class="nav-link "><span class="pcoded-micon"><i class="fa fa-home"></i></span><span class="pcoded-mtext">Home</span></a>
+                        <ul class="pcoded-submenu">
+                            <li><a href="{%url 'dashboard:home'%}">Dashboard</a>
+                            <li><a href="{%url 'dashboard:tag_list'%}">Update Tag List</a>
+                            <li><a href="{%url 'dashboard:create_tasks'%}">Create Tasks</a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li class="nav-item pcoded-hasmenu">
+                        <a href="javascript:" class="nav-link "><span class="pcoded-micon"><i class="feather icon-user"></i></span><span class="pcoded-mtext">Helper</span></a>
+                        <ul class="pcoded-submenu">
+                            <li><a href="{%url 'dashboard:bulk_registration'%}">Register Helpers</a>
+                            <li><a href="{%url 'dashboard:update_doctor_slot'%}">Doctor slots</a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li class="nav-item pcoded-hasmenu">
+                        <a href="javascript:" class="nav-link "><span class="pcoded-micon"><i class="feather icon-bar-chart"></i></span><span class="pcoded-mtext">Stats</span></a>
+                        <ul class="pcoded-submenu">
+                            {% now "Y" as current_year %}
+                            {% now "M" as current_month %}
+                            {% with "All" as all %}
+                            <li><a href="{%url 'dashboard:yearly_stats' all current_year %}">By Year</a>
+                            </li>
+                            <li><a href="{%url 'dashboard:monthly_stats' all current_month current_year %}">By Month</a>
+                            </li>
+                            {%endwith%}
+
+                        </ul>
+                    </li>
+
+                    <li class="nav-item pcoded-hasmenu">
+                        <a href="javascript:" class="nav-link "><span class="pcoded-micon"><i class="feather icon-alert-circle"></i></span><span class="pcoded-mtext">Questions</span></a>
+                        <ul class="pcoded-submenu">
+                            {% with "All" as all %}
+                            <li><a href="{%url 'dashboard:list_qanda' all %}">Questions</a>
+
+                            </li>
+                            {%endwith%}
+                        </ul>
+                    </li>
+
+                    <li class="nav-item pcoded-hasmenu">
+                        <a href="javascript:" class="nav-link "><span class="pcoded-micon"><i class="feather icon-file-text"></i></span><span class="pcoded-mtext">Surveys</span></a>
+                        <ul class="pcoded-submenu">
+                            <li><a href="{%url 'dashboard:create_survey'%}">Make Survey</a>
+                            </li>
+                            <li><a href="{%url 'dashboard:view_surveys'%}">View all Surveys</a>
+                            </li>
+                            <li><a href="{%url 'dashboard:clientwise_surveys'%}">Client wise</a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="/demo2/web_auth/logout/" class="nav-link ">
+                            <span class="pcoded-micon"><i class="feather icon-power"></i></span><span class="">Logout</span>
+                        </a>
+                    </li>
+                                     
+                </ul>
+            </div>
+        </div>
+    </nav>

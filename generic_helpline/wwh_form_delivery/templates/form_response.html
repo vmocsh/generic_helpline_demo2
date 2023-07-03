@@ -1,0 +1,49 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Contact Us</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--===============================================================================================-->
+    <link rel="icon" type="image/png" href="{% static 'wwh_form_delivery/icons/favicon.ico' %}"/>
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css"
+          href="{% static 'wwh_form_delivery/vendor/bootstrap/css/bootstrap.min.css' %}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css"
+          href="{% static 'wwh_form_delivery/fonts/font-awesome-4.7.0/css/font-awesome.min.css' %}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css"
+          href="{% static 'wwh_form_delivery/fonts/iconic/css/material-design-iconic-font.min.css' %}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static 'wwh_form_delivery/vendor/animate/animate.css' %}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static 'wwh_form_delivery/vendor/select2/select2.min.css' %}">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="{% static 'wwh_form_delivery/css/util.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'wwh_form_delivery/css/main.css' %}">
+    <!--===============================================================================================-->
+</head>
+<body>
+
+
+<div class="container-contact100">
+    <div class="wrap-contact100">
+        <form class="contact100-form validate-form">
+            {% csrf_token %}
+            <span class="contact100-form-title">
+					KEM Hospital Contact Form
+                </span>
+
+
+            <span class="input100" style="font-size: 18px; text-align: center;">
+                    {{message}}
+                </span>
+
+        </form>
+    </div>
+</div>
+
+</body>
+</html>

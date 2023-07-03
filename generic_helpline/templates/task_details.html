@@ -1,0 +1,184 @@
+{% extends "layouts/base.html" %}
+
+{% load static %}
+
+
+{% block title %} Helpline {% endblock %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+<div class="pcoded-content">
+    <div class="pcoded-inner-content">
+        <!-- [ breadcrumb ] start -->
+        <!-- [ breadcrumb ] end -->
+        <div class="main-body">
+            <div class="page-wrapper">
+                <!-- [ Main Content ] start -->
+                <div class="row">
+
+                    <!-- [ Hover-table ] start -->
+                    <div class="col-xl-12">
+
+
+                        <div class="card" style="margin-bottom: 1cm;">
+                            <div class="card-header" style="margin-bottom: 1cm;">
+                                <h5>Task Details</h5>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-offset-2 col-md-8" style="margin: auto;">
+                                    <div class="x_panel">
+                                        <div class="x_content text-center" style="color:black;font-size: large;">
+                                            <p>Task Id : {{task.id}}</p>
+                                                            <p>Task Category : {{task.category}}</p>
+                                                            <p>Client : {{task.call_request.client}}</p>
+                                                            <p>Created On : {{task.created | date:"d.m.Y, g:i a"}}</p>
+                                                            <p>Assigned Helper : </p>
+                                                            {% for help in prev_helpers %}
+                                                            <td class="text-center">
+                                                                {%if forloop.counter <= 1%} <p>
+                                                                    {{help.fromHelper.user.first_name}}</p>
+                                                                    <p>Reallocated to:</p>
+                                                                    {%else%}
+                                                                    <p> {{help.fromHelper.user.first_name}} </p>
+                                                                    {%endif%}
+                                                            </td>
+                                                            {% endfor %}
+                                                            <p> {{helper_name}} </p>
+                                                            {%ifequal feedback.created None%}
+                                                            <p>Task Status : {{status}}</p>
+                                                            {%else%}
+                                                            <p>Task Status : {{status}}</p>
+
+                                                            <p>Completed On: {{feedback.created | date:"d.m.Y, g:i a"}}
+                                                            </p>
+                                                            {%endifequal%}
+
+                                                            {%ifnotequal feedback.created None%}
+                                                            <p>Question : {{feedback.question}}</p>
+                                                            <p>Answer : {{feedback.answer}}</p>
+                                                            {%endifnotequal%}
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                        <!-- [ Hover-table ] start -->
+                        <!-- <div class="col-xl-12">
+
+                            <div class="card">
+                                <div class="card-header" style="margin-bottom: 0;">
+                                    <h5>Helper Statistics</h5>
+                                </div>
+
+                                <div class="col-md-3 pull-right">
+                                    <br>
+                                    <select class="form-control" id="years" onchange="changeYear()">
+                                        <option value="0">Current Year ({{cur_year}})</option>
+                                        {%for year in years%}
+                                        <option value="{{year}}">{{year}}</option>
+                                        {%endfor%}
+                                    </select>
+                                </div>
+                                <div class="col-md-3 pull-right">
+                                    <br>
+                                    <select class="form-control" id="cats" onchange="changeCats()">
+                                        <option value="0">Current Category ({{cur_cat}})</option>
+                                        <option value="All">All</option>
+                                        {%for cat in helper_cats%}
+                                        <option value="{{cat.name}}">{{cat.name}}</option>
+                                        {%endfor%}
+                                    </select>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <div class="x_content2">
+                                            <div id="graphx" style="width:100%; height:300px;"></div>
+                                        </div>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+                        </div> -->
+
+                        <div class="col-xl-12">
+
+
+                            <div class="card" style="margin-bottom: 1cm;">
+                                <div class="card-header" style="margin-bottom:0;">
+                                    <h5>Call details</h5>
+                                </div>
+    
+                                <div class="card-block table-border-style">
+                                    <div class="table-responsive">
+                                        <table class="table table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th class="text-center">#</th>
+                                                    <th class="text-center">Helper</th>
+                                                    <th class="text-center">Call Time</th>
+                                                    <th class="text-center">Call Pickup Duration</th>
+                                                    <th class="text-center">Call Duration</th>
+
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                {% for call in call_forward %}
+                                                <tr>
+                                                    <td class="text-center">
+                                                        {{forloop.counter}}
+                                                    </td>
+                                                    <td class="text-center">
+                                                        {% for helper in helpers %}
+                                                            {% if helper.helper_number == call.helper_no	 %}
+                                                                 {{helper.user.first_name}}
+                                                            {% endif %}
+                                                        {% endfor %}
+                                                    </td>
+                                                    <td class="text-center">
+                                                        {{ call.created | date:"d.m.Y, g:i a" }}
+                                                    </td>
+                                                    <td class="text-center">
+                                                        {{ call.call_pickup_duration}} secs
+                                                    </td>
+                                                    <td class="text-center">
+                                                        {{ call.call_duration}} secs
+                                                    </td>
+
+
+
+                                                </tr>
+                                                {% endfor %}
+                                                </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                </div>
+            </div>
+        </div>
+        <!-- [ Main Content ] end -->
+    </div>
+</div>
+</div>
+</div>
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#calls').dataTable();
+        });
+    </script>
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

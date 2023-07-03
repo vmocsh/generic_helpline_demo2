@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Previous Forms</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<div class="container">
+  <h2>Edit an older form or fill out a new form : </h2>
+  <br>
+  <ul class="list-group" style="list-style-type:none;">
+    {% for task in tasks %}
+        <li><a href="{% url 'wwh_form_delivery:task' task_id=task.id  otp=otp%}" class="list-group-item list-group-item-action">Form {{task.id}}   Last Updated At {{task.modified}}</a></li>
+    {% endfor %}
+    <li><a href="{% url 'wwh_form_delivery:task' task_id=0 otp=otp%}" class="list-group-item list-group-item-action">Fill New Form</a></li>
+</ul>
+</div>
+
+</body>
+</html>

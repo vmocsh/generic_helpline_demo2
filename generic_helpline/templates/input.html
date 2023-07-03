@@ -1,0 +1,77 @@
+{% extends "layouts/base.html" %}
+
+{% load static %}
+
+
+{% block title %} Helpline {% endblock %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+<div class="pcoded-content">
+    <div class="pcoded-inner-content">
+        <!-- [ breadcrumb ] start -->
+        <!-- [ breadcrumb ] end -->
+        <div class="main-body">
+            <div class="page-wrapper">
+                <!-- [ Main Content ] start -->
+                <div class="row">
+
+                    <!-- [ Hover-table ] start -->
+                    <div class="col-xl-12">
+                        <div class="card">
+                            <div class="card-header" style="margin-bottom: 1cm;">
+                                <h1 class="mb-3 h2" style="text-align: left ; color:hotpink;">Input</h1>
+                                <!-- <h5>Input {{page}}</h5> -->
+                            </div>
+
+                            <form method="post" action="" class="row g-3"
+                                enctype="multipart/form-data">{% csrf_token %}
+
+                                {% for field in form %}
+                                    <div class="form-group col-md-6">
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12">{{field.label}}
+                                        </label>
+                                
+                                        <div class="col-md-9 col-sm-9 col-xs-12">
+                                            {{ field }}      
+                                            <div class="info">
+                                                 <strong>{{ field.errors | escape }}</strong>
+                                            </div>
+
+                                        </div>
+                                    </div>
+    
+                                {% endfor %}
+                              
+<!-- 
+                                <div class="form-group col-12">
+                                    <div class="col-md-11 col-sm-16 col-xs-12 col-md-offset-7 text-center">
+                                        <button type="submit" class="btn btn-success" style="border-color: red; color:blue">
+                                            Add {{page}}</button>
+                                    </div>
+                                </div> -->
+
+                                 <div class="form-group col-12">
+                                <div class="col-md-11 col-sm-16 col-xs-12 col-md-offset-7 text-center">
+                                    <button type="submit" class="btn btn-outline-success my-2 my-sm-0" style="color: red; border-color:red">Add {{page}}</button>
+                              </div></div>
+                                
+                            </form>
+                            
+
+                        </div>
+                    </div>
+                </div>
+                <!-- [ Main Content ] end -->
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}
